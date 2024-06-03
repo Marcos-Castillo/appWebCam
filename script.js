@@ -1,4 +1,3 @@
-
 const tieneSoporteUserMedia = () =>
     !!(navigator.getUserMedia || 
        (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || 
@@ -12,9 +11,7 @@ const _getUserMedia = (...arguments) =>
 const $video = document.querySelector("#video"),
     $canvas = document.querySelector("#canvas"),
     $boton = document.querySelector("#boton"),
-    $botonLeerCodigo = document.querySelector("#botonLeerCodigo"),
-    $listaDeDispositivos = document.querySelector("#listaDeDispositivos"),
-    $resultadoCodigo = document.querySelector("#resultadoCodigo");
+    $listaDeDispositivos = document.querySelector("#listaDeDispositivos");
 
 const limpiarSelect = () => {
     for (let x = $listaDeDispositivos.options.length - 1; x >= 0; x--) {
@@ -110,37 +107,46 @@ const llenarSelectConDispositivosDisponibles = () => {
 
                     $video.play();
                 });
-
-                $botonLeerCodigo.addEventListener("click", function() {
-                    leerCodigoDeBarras();
-                });
             }, (error) => {
                 console.log("Permiso denegado o error: ", error);
             });
     }
-
-    const leerCodigoDeBarras = () => {
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: $video
-            },
-            decoder: {
-                readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
-            }
-        }, function (err) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            Quagga.start();
-        });
-
-        Quagga.onDetected(function (result) {
-            const code = result.codeResult.code;
-            $resultadoCodigo.innerHTML = `Código detectado: ${code}`;
-            Quagga.stop();
-        });
-    }
 })();
+
+
+//gestion de codigo de barra 
+
+const $botonLeerCodigo = document.querySelector("#botonLeerCodigo");
+const $resultadoCodigo = document.querySelector("#resultadoCodigo");
+
+$botonLeerCodigo.addEventListener("click", function() {
+    leerCodigoDeBarras();
+});
+
+
+const leerCodigoDeBarras = () => {
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: $video
+        },
+        decoder: {
+            readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
+        }
+    }, function (err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        Quagga.start();
+    });
+
+    Quagga.onDetected(function (result) {
+        const code = result.codeResult.code;
+        $resultadoCodigo.innerHTML = `Código detectado: ${code}`;
+        Quagga.stop();
+    });
+};
+
+
