@@ -47,7 +47,7 @@
         document.getElementById('botonConsultarPrecio').addEventListener('click', function() {
             const sucursal = document.getElementById('sucursal').value;
             const ean = document.getElementById('resultadoCodigo').textContent;
-            const url = `http://www.dinosauriorrhh.com.ar/apireporteprecios/precios/${sucursal}-${ean}`;
+            const url = `https://www.dinosauriorrhh.com.ar/apireporteprecios/precios/${sucursal}-${ean}`;
             console.log(url)
             fetch(url)
             .then(response => response.text())
