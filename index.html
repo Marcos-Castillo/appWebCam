@@ -20,17 +20,47 @@
 <body class="container text-center">
     <canvas id="canvas" class="d-none"></canvas>
     <video class="border my-3 w-100" muted="muted" id="video"></video>
-    <div id="resultadoCodigo" class="alert alert-info" role="alert"></div>
+    <input id="resultadoCodigo" class="alert alert-info col-12 text-center" role="alert"></input>
+    <div id="resultadoImagen"></div>
     <div class="my-3 d-flex gap-4">
         <button class="btn btn-primary col p-4 " id="boton">Tomar foto</button>
         <button class="btn btn-secondary col p-4" id="botonLeerCodigo">Leer Código de Barra</button>
+        <button class="btn btn-danger col p-4" id="botonConsultarPrecio">Consultar Precio</button>
     </div>
     <div class="form-group">
         <label for="listaDeDispositivos">Dispositivos de video:</label>
         <select class="form-control" name="listaDeDispositivos" id="listaDeDispositivos"></select>
     </div>
+    <div class="form-group mt-3">
+        <label for="sucursal">Seleccionar Sucursal:</label>
+        <select class="form-control" id="sucursal">
+            <option value="AV">Sucursal AV</option>
+            <option value="R20">Sucursal R20</option>
+            <option value="CVL">Sucursal CVL</option>
+        </select>
+    </div>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script> -->
     <script src="js/quagga.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+        document.getElementById('botonConsultarPrecio').addEventListener('click', function() {
+            const sucursal = document.getElementById('sucursal').value;
+            const ean = document.getElementById('resultadoCodigo').value;
+            const url = `http://www.dinosauriorrhh.com.ar/apireporteprecios/precios/${sucursal}-${ean}`;
+       
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const img = document.createElement('img');
+                    img.src = `data:image/png;base64,${data.slice(1, -1)}`;
+                    console.log(img.src)
+                    document.getElementById('resultadoImagen').innerHTML = '';
+                    document.getElementById('resultadoImagen').appendChild(img);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
 </html>
