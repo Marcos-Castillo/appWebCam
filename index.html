@@ -20,7 +20,7 @@
 <body class="container text-center">
     <canvas id="canvas" class="d-none"></canvas>
     <video class="border my-3 w-100" muted="muted" id="video"></video>
-    <div id="resultadoCodigo" class="alert alert-info col-12 text-center" contenteditable="true" role="alert"></div>
+    <div id="resultadoCodigo" class="alert alert-info col-12 text-center" contenteditable="true" role="alert">7798060852822</div>
     <div id="resultadoImagen"></div>
     <div class="my-3 d-flex">
         <button class="btn btn-primary col p-4 " id="boton">Tomar foto</button>
@@ -37,6 +37,7 @@
             <option value="AV">Sucursal AV</option>
             <option value="R20">Sucursal R20</option>
             <option value="CVL">Sucursal CVL</option>
+            <option value="COC">Sucursal COC</option>
         </select>
     </div>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script> -->
@@ -47,19 +48,18 @@
             const sucursal = document.getElementById('sucursal').value;
             const ean = document.getElementById('resultadoCodigo').textContent;
             const url = `http://www.dinosauriorrhh.com.ar/apireporteprecios/precios/${sucursal}-${ean}`;
-       
+            console.log(url)
             fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    const img = document.createElement('img');
-                    img.src = `data:image/png;base64,${data.slice(1, -1)}`;
-                    console.log(img.src)
-                    document.getElementById('resultadoImagen').innerHTML = '';
-                    document.getElementById('resultadoImagen').appendChild(img);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            .then(response => response.text())
+            .then(data => {
+                const img = document.createElement('img');
+                img.src = `data:image/png;base64,${data.slice(1, -1)}`;
+                document.getElementById('resultadoImagen').innerHTML = '';
+                document.getElementById('resultadoImagen').appendChild(img);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     </script>
 </body>

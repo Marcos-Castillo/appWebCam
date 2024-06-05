@@ -144,7 +144,7 @@ const leerCodigoDeBarras = () => {
 
     Quagga.onDetected(function (result) {
         const code = result.codeResult.code;
-        resultadoCodigo.innerHTML = `Código detectado: ${code}`;
+        resultadoCodigo.innerHTML = `${code}`;
         Quagga.stop();
     });
 };
