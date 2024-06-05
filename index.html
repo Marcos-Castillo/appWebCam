@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Tomar foto con Javascript y Leer Código de Barra</title>
- <!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <title>Verificador de precios</title>
     <link rel="stylesheet" href="css/bootstrap.5.0.2.min.css">
     <style>
         @media only screen and (max-width: 700px) {
@@ -19,19 +15,19 @@
 </head>
 <body class="container text-center">
     <canvas id="canvas" class="d-none"></canvas>
-    <video class="border my-3 w-100" muted="muted" id="video"></video>
+    <video class="border my-3 w-50 m-auto" muted="muted" id="video"></video>
     <div id="resultadoCodigo" class="alert alert-info col-12 text-center" contenteditable="true" role="alert">7798060852822</div>
-    <img src="" alt="" id="resultadoImagen">
-    <div class="my-3 d-flex">
-        <button class="btn btn-primary col p-4 " id="boton">Tomar foto</button>
-        <button class="btn btn-secondary col p-4 mx-1" id="botonLeerCodigo">Leer Código de Barra</button>
-        <button class="btn btn-warning col p-4" id="botonConsultarPrecio">Consultar Precio</button>
+    <img src="" class="w-100" alt="" id="resultadoImagen">
+    <div class="my-3 d-flex gap-1">
+                <button class="btn btn-primary col py-4  rounded" id="botonLeerCodigo">Scan</button>
+        <button class="btn btn-secondary col py-4 rounded" id="botonConsultarPrecio">Consultar Precio</button>
     </div>
-    <div class="form-group">
+<div class="d-flex gap-1">
+    <div class="form-group col">
         <label for="listaDeDispositivos">Dispositivos de video:</label>
         <select class="form-control" name="listaDeDispositivos" id="listaDeDispositivos"></select>
     </div>
-    <div class="form-group mt-3">
+    <div class="form-group col">
         <label for="sucursal">Seleccionar Sucursal:</label>
         <select class="form-control" id="sucursal">
             <option value="AV">Sucursal AV</option>
@@ -40,6 +36,8 @@
             <option value="COC">Sucursal COC</option>
         </select>
     </div>
+</div>
+<button class="btn btn-secondary col-12 mt-2 p-4 rounded" id="boton">Tomar foto</button>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script> -->
     <script src="js/quagga.min.js"></script>
     <script src="js/script.js"></script>

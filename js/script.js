@@ -34,7 +34,7 @@ const llenarSelectConDispositivosDisponibles = () => {
                     dispositivosDeVideo.push(dispositivo);
                 }
             });
-
+            
             if (dispositivosDeVideo.length > 0) {
                 dispositivosDeVideo.forEach(dispositivo => {
                     const option = document.createElement('option');
