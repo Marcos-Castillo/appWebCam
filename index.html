@@ -21,11 +21,11 @@
     <canvas id="canvas" class="d-none"></canvas>
     <video class="border my-3 w-100" muted="muted" id="video"></video>
     <div id="resultadoCodigo" class="alert alert-info col-12 text-center" contenteditable="true" role="alert">7798060852822</div>
-    <div id="resultadoImagen"></div>
+    <img src="" alt="" id="resultadoImagen">
     <div class="my-3 d-flex">
         <button class="btn btn-primary col p-4 " id="boton">Tomar foto</button>
         <button class="btn btn-secondary col p-4 mx-1" id="botonLeerCodigo">Leer Código de Barra</button>
-        <button class="btn btn-danger col p-4" id="botonConsultarPrecio">Consultar Precio</button>
+        <button class="btn btn-warning col p-4" id="botonConsultarPrecio">Consultar Precio</button>
     </div>
     <div class="form-group">
         <label for="listaDeDispositivos">Dispositivos de video:</label>
@@ -52,10 +52,8 @@
             fetch(url)
             .then(response => response.text())
             .then(data => {
-                const img = document.createElement('img');
+                var img = document.getElementById('resultadoImagen');
                 img.src = `data:image/png;base64,${data.slice(1, -1)}`;
-                document.getElementById('resultadoImagen').innerHTML = '';
-                document.getElementById('resultadoImagen').appendChild(img);
             })
             .catch(error => {
                 console.error('Error:', error);
