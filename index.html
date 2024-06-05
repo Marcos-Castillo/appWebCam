@@ -20,11 +20,11 @@
 <body class="container text-center">
     <canvas id="canvas" class="d-none"></canvas>
     <video class="border my-3 w-100" muted="muted" id="video"></video>
-    <input id="resultadoCodigo" class="alert alert-info col-12 text-center" role="alert"></input>
+    <div id="resultadoCodigo" class="alert alert-info col-12 text-center" contenteditable="true" role="alert"></div>
     <div id="resultadoImagen"></div>
-    <div class="my-3 d-flex gap-4">
+    <div class="my-3 d-flex">
         <button class="btn btn-primary col p-4 " id="boton">Tomar foto</button>
-        <button class="btn btn-secondary col p-4" id="botonLeerCodigo">Leer Código de Barra</button>
+        <button class="btn btn-secondary col p-4 mx-1" id="botonLeerCodigo">Leer Código de Barra</button>
         <button class="btn btn-danger col p-4" id="botonConsultarPrecio">Consultar Precio</button>
     </div>
     <div class="form-group">
@@ -45,7 +45,7 @@
     <script>
         document.getElementById('botonConsultarPrecio').addEventListener('click', function() {
             const sucursal = document.getElementById('sucursal').value;
-            const ean = document.getElementById('resultadoCodigo').value;
+            const ean = document.getElementById('resultadoCodigo').textContent;
             const url = `http://www.dinosauriorrhh.com.ar/apireporteprecios/precios/${sucursal}-${ean}`;
        
             fetch(url)
